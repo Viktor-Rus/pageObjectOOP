@@ -1,6 +1,8 @@
 package com.demoqa.pages;
 import com.codeborne.selenide.SelenideElement;
 import com.demoqa.elements.Button;
+import com.demoqa.elements.Input;
+import com.demoqa.elements.RadioButton;
 import com.demoqa.pages.components.*;
 import java.io.File;
 import static com.codeborne.selenide.Condition.text;
@@ -16,13 +18,14 @@ public class RegistrationFormPage {
     private HobbiesComponent hobbiesComponent = new HobbiesComponent();
     private StateAndCityComponent stateAndCityComponent = new StateAndCityComponent();
 
-    private SelenideElement
-            firstNameInput = $("#firstName"),
-            lastNameInput = $("#lastName"),
-            emailInput = $("#userEmail"),
-            uploadPicture = $("#uploadPicture"),
-            currentAddressInput = $("#currentAddress");
-            Button submit = new Button("Submit", $(byText("Submit")));
+    private SelenideElement uploadPicture = $("#uploadPicture");
+
+    Input lastNameInput = new Input("lastNameInput",$("#lastName"));
+    Input emailInput =  new Input("emailInput",$("#userEmail"));
+    Input currentAddressInput =  new Input("currentAddressInput", $("#currentAddress"));
+    Input firstNameInput = new Input ("firstNameInput", $("#firstName"));
+    Button submit = new Button("Submit", $(byText("Submit")));
+    RadioButton gender = new RadioButton("gender",  $("#genterWrapper"));
 
     private final static String TITLE_TEXT = "Student Registration Form";
 
@@ -70,8 +73,7 @@ public class RegistrationFormPage {
     }
 
     public RegistrationFormPage setGender(String value) {
-        $("#genterWrapper").$(byText(value)).click();
-
+        gender.setElement(value);
         return this;
     }
 
